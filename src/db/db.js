@@ -7,4 +7,4 @@ async function connectDB(){
         console.log('Database connection failed',error);
     }
 }
-module.export=connectDB;
+module.exports=connectDB;

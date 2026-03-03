@@ -3,3 +3,4 @@ we use route folder to make API
 For APIS we write logic in controller file.
 all middlewares in app.js
 server creation in appp.js
+we do hashing of password by bcryptjs
