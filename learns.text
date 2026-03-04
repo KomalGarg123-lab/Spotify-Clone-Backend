@@ -4,3 +4,4 @@ For APIS we write logic in controller file.
 all middlewares in app.js
 server creation in appp.js
 we do hashing of password by bcryptjs
+use storage.service.js for some code for image kit
