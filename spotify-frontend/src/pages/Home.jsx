@@ -2,12 +2,11 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 
 export default function Home() {
-
   const [musics, setMusics] = useState([]);
 
   useEffect(() => {
     async function fetchMusics() {
-      const res = await API.get("/music");
+      const res = await API.get("/");
       setMusics(res.data.musics);
     }
 
@@ -18,7 +17,7 @@ export default function Home() {
     <div style={{ padding: "20px" }}>
       <h1>All Musics</h1>
 
-      {musics.map(m => (
+      {musics.map((m) => (
         <div key={m._id}>
           <h3>{m.title}</h3>
           <p>{m.artist.username}</p>
@@ -26,7 +25,6 @@ export default function Home() {
           <audio controls src={m.uri}></audio>
         </div>
       ))}
-
     </div>
   );
 }
