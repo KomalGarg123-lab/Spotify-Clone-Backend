@@ -1,0 +1,14 @@
+Start with Frontend(React) :
+        we start from html ==> main.jsx
+        main.jsx connected with our html that was connected with browser 
+        main.jsx connext app.jsx the data of app.jsx stored in html using main.jsx
+        and we use global css as a index.css that was applicable on our whole website.
+
+SPA (SIGNLE PAGE APPLICATION):
+                Single Page Application (SPA) React me ek aisa app hota hai jisme 
+                sirf ek HTML file (index.html) load hoti hai aur saara content React
+                components se render hota hai. URL change ho sakta hai jaise /login ya /albums, 
+                lekin browser reload nahi hota. React Router detect karta hai URL change aur 
+                sirf required component update karta hai. Isse app fast hota hai, user ko 
+                lagta hai alag pages me ghoom rahe hain, lekin background me sirf components 
+                replace ho rahe hain. SPA ka ye structure modern web apps ko smooth aur efficient banata hai.

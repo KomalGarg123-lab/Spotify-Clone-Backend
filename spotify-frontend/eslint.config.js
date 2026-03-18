@@ -27,3 +27,20 @@ export default defineConfig([
     },
   },
 ])
+
+/*
+Ye ESLint config hai
+
+Purpose: dev time me code check karna → errors aur best practices follow karne ke liye
+
+Browser ko iska koi fark nahi padta → sirf developer ke liye tool hai
+
+globalIgnores(['dist']) → build folder ignore kare → unnecessary warnings na aaye
+
+💡 Analogy:
+
+Project = homework
+
+ESLint = teacher jo check karta hai mistakes + style
+
+Vite/React = tools jo run karte hai homework */
