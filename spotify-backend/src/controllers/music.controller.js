@@ -7,7 +7,7 @@ const jwt = require("jsonwebtoken");
 async function createMusic(req, res) {
     const { title } = req.body;
 
-    const musicFile = req.files?.music?.[0];
+    const musicFile = req.files?.music?.[0]; // music at index 0 and counter at index 1
     const coverFile = req.files?.cover?.[0];
 
     if (!musicFile) {

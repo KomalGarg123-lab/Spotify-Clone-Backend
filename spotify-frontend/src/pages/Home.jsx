@@ -9,10 +9,10 @@ export default function Home() {
   const [musics, setMusics] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
 
-  useEffect(() => {
+  useEffect(() => { // whenever home page runs this useeffect runs.
     async function fetchMusics() {
       const res = await API.get("/");
-      setMusics(res.data.musics || []);
+      setMusics(res.data.musics || []); // it goes to backend and ask for musics in databse an dget musics in this array.
     }
 
     fetchMusics();
@@ -29,7 +29,7 @@ export default function Home() {
     }
   }, []);
 
-  function handlePlay(musicId) {
+  function handlePlay(musicId) { // increase counter of song in frontend and backend.
     API.post(`/play/${musicId}`).catch((err) => {
       console.log("Failed to record play", err);
     });
@@ -43,12 +43,12 @@ export default function Home() {
     );
   }
 
-  const trendingSongs = musics.filter((m) => (m.playCount || 0) > 5);
+  const trendingSongs = musics.filter((m) => (m.playCount || 0) > 5); // only save songs played > 5 in this variable.
 
-  const trendingSource = trendingSongs.length > 0 ? trendingSongs : musics;
+  const trendingSource = trendingSongs.length > 0 ? trendingSongs : musics; // if no any song of played >5 then it show all songs.
 
-  const artistMap = new Map();
-  musics.forEach((m) => {
+  const artistMap = new Map(); 
+  musics.forEach((m) => {  //The Logic: It goes through every song. If "Artist A" has 3 songs with 10 plays each, the artistMap calculates that "Artist A" has 30 total plays
     const artist = m.artist;
     if (!artist) return;
     const plays = m.playCount || 0;
@@ -65,14 +65,15 @@ export default function Home() {
   if (popularArtists.length === 0) {
     popularArtists = Array.from(artistMap.values());
   }
-
+//The Filter: Just like the songs, it only wants to show artists who have a total of more than 5 plays across all their work.
+//The Backup: If no artist is popular yet, it just shows all the artists so the page doesn't look empty.
   const popularAlbumsAndSingles = trendingSource;
   const popularRadio = trendingSource;
-  const featuredCharts = [...trendingSource].sort(
+  const featuredCharts = [...trendingSource].sort( //Logic: It puts the song with the highest plays at the top (Number 1) and the lowest at the bottom. This is exactly how "Top 50" charts work.
     (a, b) => (b.playCount || 0) - (a.playCount || 0)
   );
 
-  const mySongs =
+  const mySongs = // saving own songs.
     currentUser?.role === "artist"
       ? musics.filter((m) => m.artist && (m.artist._id === currentUser.id || m.artist.id === currentUser.id))
       : [];

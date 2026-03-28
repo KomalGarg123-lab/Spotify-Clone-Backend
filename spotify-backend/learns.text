@@ -16,6 +16,45 @@ ImageKit cloud →
 public URL →
 saved in DB
 
+auth.routes.js: Multer catches the "photo" from the artist and puts it in the server's RAM.
+
+auth.controller.js: Takes that photo from RAM, converts it to a Base64 string, and passes it to...
+
+storage.service.js (This file): Sends that string to ImageKit with a unique name and folder.
+
+ImageKit Cloud: Stores the actual image and sends back a URL.
+
+auth.controller.js: Receives that URL and saves it into MongoDB under the artist's photoUri.
+.
+.
+.
+.
+.
+The Bcrypt "Security Pipeline" Summary
+Frontend: The user types their real password (e.g., "music@123") into the registration form and hits "Submit."
+
+auth.controller.js (The Arrival): Your server receives the real password in req.body.password. At this moment, the password is vulnerable in the server's RAM for a millisecond.
+
+Bcrypt Library (The Transformation): You call bcrypt.hash(password, 10). Bcrypt immediately does two things:
+
+Generates a Random Salt (a unique secret string).
+
+Mixes the password with that salt and runs the "Hashing Math" 1,024 times.
+
+auth.controller.js (The Result): Bcrypt returns a long, "scrambled" string (the Hash) like $2b$10$R9h/lk.... The real password "music@123" is now destroyed and deleted from the RAM.
+
+MongoDB (The Permanent Home): Your controller takes only that Hash and saves it in the password field of your Database.
+
+The Resulting Security (The "Wall"):
+
+If a Hacker steals the Database: They see the Hash. Since hashing is a one-way street, they cannot reverse it to find "music@123".
+
+If a Hacker steals the Code: They see you used "10 rounds." Even then, they can't decode the hash because the math doesn't allow it—they can only "guess," which would take them 100+ years.
+
+.
+.
+.
+.
 
 to call next middleware we use next() like : in /upload we have 3 parameter calling we call 1 first then do next() in first code to call  second.
 middleware can read data , update data and send response.

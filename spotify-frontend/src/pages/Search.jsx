@@ -26,7 +26,7 @@ export default function Search() {
     );
   }
 
-  const filtered = useMemo(() => {
+  const filtered = useMemo(() => { // helping to search songs.
     const q = query.trim().toLowerCase();
     if (!q) return musics;
     return musics.filter((m) => {
